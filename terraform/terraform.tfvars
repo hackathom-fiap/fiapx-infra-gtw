@@ -9,3 +9,4 @@ nlb_listener_arn = "arn:aws:elasticloadbalancing:us-east-1:239409137076:listener
 
 # Security Group do Cluster EKS para o VPC Link
 vpc_link_security_group_ids = ["sg-0029147ed7e3cef12"]
+
