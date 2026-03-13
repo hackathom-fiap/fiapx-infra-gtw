@@ -47,6 +47,36 @@ resource "aws_apigatewayv2_integration" "this" {
 }
 
 # 4. Definição das Rotas da Aplicação
+
+# Rota de Cadastro de Usuário
+resource "aws_apigatewayv2_route" "auth_register" {
+  api_id    = aws_apigatewayv2_api.this.id
+  route_key = "POST /api/auth/register"
+  target    = "integrations/${aws_apigatewayv2_integration.this.id}"
+}
+
+# Rota de Login
+resource "aws_apigatewayv2_route" "auth_login" {
+  api_id    = aws_apigatewayv2_api.this.id
+  route_key = "POST /api/auth/login"
+  target    = "integrations/${aws_apigatewayv2_integration.this.id}"
+}
+
+# Rota de Upload de Vídeo
+resource "aws_apigatewayv2_route" "video_upload" {
+  api_id    = aws_apigatewayv2_api.this.id
+  route_key = "POST /api/videos/upload"
+  target    = "integrations/${aws_apigatewayv2_integration.this.id}"
+}
+
+# Rota de Status de Vídeos
+resource "aws_apigatewayv2_route" "video_status" {
+  api_id    = aws_apigatewayv2_api.this.id
+  route_key = "GET /api/videos/status"
+  target    = "integrations/${aws_apigatewayv2_integration.this.id}"
+}
+
+# Rota Padrão (Fallback)
 resource "aws_apigatewayv2_route" "default" {
   api_id    = aws_apigatewayv2_api.this.id
   route_key = "$default"
