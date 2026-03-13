@@ -3,11 +3,16 @@ data "aws_vpc" "existing" {
   id = var.vpc_id
 }
 
-# Data source para obter as subnets existentes
+# Data source para obter as subnets existentes (Filtrando zonas compatíveis com VPC Link)
 data "aws_subnets" "existing" {
   filter {
     name   = "vpc-id"
     values = [data.aws_vpc.existing.id]
+  }
+
+  filter {
+    name   = "availability-zone"
+    values = ["us-east-1a", "us-east-1b", "us-east-1c"]
   }
 }
 
